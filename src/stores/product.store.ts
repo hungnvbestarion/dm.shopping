@@ -6,6 +6,7 @@ import {
   type ProductCreateReq,
 } from '@/models/product.model'
 import { productService } from '@/services/product.service'
+import { ToastHelper } from '@/helpers/toast.helper'
 
 interface ProductState {
   products: Product[]
@@ -31,7 +32,7 @@ export const useProductStore = defineStore('product', {
     filteredCategories(): Category[] {
       return this.categories
         .filter((x) => !x.name.includes('undefine') && !x.name.includes('_'))
-        .slice(0, 5)
+        .slice(0, 6)
     },
   },
   actions: {
@@ -62,6 +63,9 @@ export const useProductStore = defineStore('product', {
         this.loading = true
 
         const data = await productService.createProduct(item)
+        ToastHelper.showSuccess('Product created successfully')
+      } catch (error) {
+        ToastHelper.showError('Failed to create product')
       } finally {
         this.loading = false
       }
@@ -72,6 +76,9 @@ export const useProductStore = defineStore('product', {
         this.loading = true
 
         const data = await productService.updateProduct(item)
+        ToastHelper.showSuccess('Product updated successfully')
+      } catch (error) {
+        ToastHelper.showError('Failed to update product')
       } finally {
         this.loading = false
       }
@@ -82,6 +89,9 @@ export const useProductStore = defineStore('product', {
         this.loading = true
 
         const data = await productService.deleteProduct(id)
+        ToastHelper.showSuccess('Product deleted successfully')
+      } catch (error) {
+        ToastHelper.showError('Failed to delete product')
       } finally {
         this.loading = false
       }

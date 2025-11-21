@@ -1,9 +1,16 @@
 import type { Category, Product, ProductCreateReq } from '@/models/product.model'
+import { productLocalService } from '@/services/product.local.service'
 
 class ProductService {
-  private productApiUrl = `https://api.escuelajs.co/api/v1/products`
+  private apiUrl = import.meta.env.VITE_BASE_API_URL
+  private apiMode = import.meta.env.VITE_API_MODE
 
   async loadProducts(title: string, categoryId: number): Promise<Product[]> {
+    if (this.apiMode === 'mock') {
+      await delay(500)
+      return productLocalService.loadProducts(title, categoryId)
+    }
+
     let query = ''
     if (title) {
       query += `title=${title}`
@@ -16,21 +23,29 @@ class ProductService {
 
     query = query ? '?' + query : query
 
-    const response = await fetch(this.productApiUrl + query)
+    const response = await fetch(this.apiUrl + '/products' + query)
     const data = await response.json()
 
     return data
   }
 
   async loadCategories(): Promise<Category[]> {
-    const response = await fetch(`https://api.escuelajs.co/api/v1/categories`)
+    if (this.apiMode === 'mock') {
+      return productLocalService.loadCategories()
+    }
+
+    const response = await fetch(this.apiUrl + '/categories')
     const data = await response.json()
 
     return data
   }
 
   async createProduct(product: ProductCreateReq): Promise<boolean> {
-    const response = await fetch(this.productApiUrl, {
+    if (this.apiMode === 'mock') {
+      return productLocalService.createProduct(product)
+    }
+
+    const response = await fetch(this.apiUrl + '/products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,7 +62,11 @@ class ProductService {
   }
 
   async updateProduct(product: Product): Promise<boolean> {
-    const response = await fetch(this.productApiUrl + `/${product.id}`, {
+    if (this.apiMode === 'mock') {
+      return productLocalService.updateProduct(product)
+    }
+
+    const response = await fetch(this.apiUrl + '/products' + `/${product.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -64,7 +83,11 @@ class ProductService {
   }
 
   async deleteProduct(id: number): Promise<boolean> {
-    const response = await fetch(this.productApiUrl + `/${id}`, {
+    if (this.apiMode === 'mock') {
+      return productLocalService.deleteProduct(id)
+    }
+
+    const response = await fetch(this.apiUrl + '/products' + `/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -78,6 +101,10 @@ class ProductService {
 
     return true
   }
+}
+
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
 export const productService = new ProductService()

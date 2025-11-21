@@ -16,10 +16,14 @@ vi.mock('@/services/product.service', () => ({
 
 const mockProductService = productServiceModule.productService as any
 
+import { ToastHelper } from '../../src/helpers/toast.helper'
+
 describe('ProductStore', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
     vi.clearAllMocks()
+    // Mock ToastHelper
+    ToastHelper.initialize({ add: vi.fn() } as any)
   })
 
   describe('initial state', () => {

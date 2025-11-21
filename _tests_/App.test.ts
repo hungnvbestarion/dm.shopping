@@ -18,24 +18,38 @@ vi.mock('vue-router', () => ({
   })),
 }))
 
+// Mock useToast globally for App tests
+vi.mock('primevue/usetoast', () => ({
+  useToast: () => ({ add: vi.fn() }),
+}))
+
 describe('App Component', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
   })
 
+  const globalConfig = {
+    global: {
+      provide: {
+        // Provide a mock Toast instance for PrimeVue (key must be 'primevue.toast')
+        'primevue.toast': { add: vi.fn() },
+      },
+    },
+  }
+
   it('should render the component', () => {
-    const wrapper = mount(App)
+    const wrapper = mount(App, globalConfig)
     expect(wrapper.exists()).toBe(true)
   })
 
   it('should contain RouterView', () => {
-    const wrapper = mount(App)
+    const wrapper = mount(App, globalConfig)
     const routerView = wrapper.findComponent({ name: 'RouterView' })
     expect(routerView.exists()).toBe(true)
   })
 
   it('should have proper structure', () => {
-    const wrapper = mount(App)
+    const wrapper = mount(App, globalConfig)
     expect(wrapper.html()).toBeTruthy()
   })
 })

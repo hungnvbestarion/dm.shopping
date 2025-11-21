@@ -7,13 +7,13 @@ import {
   type ProductCreateReq,
 } from '@/models/product.model'
 import Button from 'primevue/button'
-import { inject, onMounted, reactive, ref, type Ref } from 'vue'
+import { inject, onMounted, ref, type Ref } from 'vue'
 import InputText from 'primevue/inputtext'
 import InputNumber from 'primevue/inputnumber'
 import Textarea from 'primevue/textarea'
 import Select from 'primevue/select'
 import { useProductStore } from '@/stores/product.store'
-import { useToast } from 'primevue/usetoast'
+import { ToastHelper } from '@/helpers/toast.helper'
 
 const emit = defineEmits<{
   onSubmit: []
@@ -26,7 +26,6 @@ const product = ref<Product>(initialProduct)
 const categories = ref<Category[]>([])
 const editMode = ref<string>('create')
 const productImage = ref<string>()
-const toast = useToast()
 
 onMounted(() => {
   product.value = dialogRef.value.data.product ? dialogRef.value.data.product : initialProduct
@@ -62,20 +61,8 @@ const saveProduct = async () => {
 
   if (editMode.value === 'create') {
     await addProduct()
-    toast.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Create a product successfully',
-      life: 10000,
-    })
   } else {
     await updateProduct()
-    toast.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Update a product successfully',
-      life: 10000,
-    })
   }
 
   await productStore.loadProducts()

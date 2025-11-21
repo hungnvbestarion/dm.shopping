@@ -11,6 +11,7 @@ import type { Product } from '@/models/product.model'
 import { useDialog } from 'primevue/usedialog'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
+import { ToastHelper } from '@/helpers/toast.helper'
 
 const toast = useToast()
 const productStore = useProductStore()
@@ -58,13 +59,6 @@ const deleteProduct = (id: number) => {
     accept: async () => {
       await productStore.deleteProduct(id)
       await productStore.loadProducts()
-
-      toast.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Product deleted successfully',
-        life: 10000,
-      })
     },
   })
 }
