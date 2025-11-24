@@ -1,0 +1,11 @@
+{
+  "passed": 25,
+  "failed": 1,
+  "total": 26,
+  "failures": [
+    {
+      "test": "Product Action Buttons",
+      "message": "No action buttons or labels found"
+    }
+  ]
+}

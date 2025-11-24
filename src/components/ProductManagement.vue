@@ -132,19 +132,17 @@ const showDialog = (item: Product | null) => {
         </template>
       </Column>
       <Column field="slug" header="Slug" class="min-w-[200px]"></Column>
-      <Column
-        field="description"
-        header="Description"
-        class="max-w-[500px] min-w-[500px] truncate"
-      ></Column>
+      <Column field="description" header="Description" class="max-w-[300px] truncate"></Column>
       <Column header="Action">
         <template #body="slotProps">
           <div class="flex">
-            <button @click="editProduct(slotProps.data)">
+            <button @click="editProduct(slotProps.data)" class="mr-2">
               <i class="fa fa-pencil-square-o cursor-pointer text-blue-900"></i>
+              <span class="sr-only">Edit</span>
             </button>
             <button @click="deleteProduct(slotProps.data.id)">
               <i class="fa fa-trash-o cursor-pointer pl-2 text-red-700"></i>
+              <span class="sr-only">Delete</span>
             </button>
           </div>
         </template>

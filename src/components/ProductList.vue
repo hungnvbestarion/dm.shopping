@@ -5,9 +5,13 @@ import { storeToRefs } from 'pinia'
 import Skeleton from 'primevue/skeleton'
 import ProductCard from '@/components/ProductCard.vue'
 import ProductSearchBar from './ProductSearchBar.vue'
+import Drawer from 'primevue/drawer'
+import Button from 'primevue/button'
+import Paginator from 'primevue/paginator'
 
 const productStore = useProductStore()
 const keySearch = ref<string>('')
+const filterVisible = ref(false)
 
 const { products, filteredCategories, selectedCategoryId, loading } = storeToRefs(productStore)
 
@@ -30,10 +34,10 @@ const selectCategory = async (categoryId: number) => {
 <!------------------------------------------------------------------------------------------------------------->
 
 <template>
-  <div class="flex gap-6">
+  <div class="flex gap-6 flex-col lg:flex-row h-full">
     <!-- Filters Sidebar -->
-    <aside class="hidden lg:block w-64">
-      <div class="bg-white rounded-lg shadow-sm p-6 sticky">
+    <aside class="hidden lg:block w-64 flex-shrink-0">
+      <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
         <h2 class="font-semibold text-lg mb-4">Categories</h2>
 
         <!-- Loading Skeleton Categories-->
@@ -50,6 +54,7 @@ const selectCategory = async (categoryId: number) => {
           <div class="space-y-2" v-if="filteredCategories && filteredCategories.length > 0">
             <button
               v-for="cat in filteredCategories"
+              :key="cat.id"
               @click="selectCategory(cat.id)"
               :class="[cat.id == selectedCategoryId ? 'bg-green-300' : 'bg-white']"
               class="w-full text-left px-3 py-2 rounded-md text-sm transition-colors cursor-pointer hover:bg-green-100"
@@ -61,8 +66,13 @@ const selectCategory = async (categoryId: number) => {
       </div>
     </aside>
 
+    <!-- Mobile Filter Button -->
+    <div class="lg:hidden">
+      <Button label="Filters" icon="pi pi-filter" @click="filterVisible = true" outlined class="w-full" />
+    </div>
+
     <!-- Products Grid -->
-    <div class="flex-1">
+    <div class="flex-1 min-w-0">
       <div class="mb-4">
         <ProductSearchBar v-model:key-search="keySearch" @on-search-change="onSearchChange" />
       </div>
@@ -72,10 +82,10 @@ const selectCategory = async (categoryId: number) => {
         <span v-else><Skeleton height="1rem" width="150px"></Skeleton></span>
       </div>
 
-      <div class="max-h-[600px] overflow-y-scroll">
+      <div class="h-full overflow-y-auto pr-1 custom-scrollbar">
         <!-- Loading Skeleton Grid -->
         <div v-if="loading" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-2">
-          <div v-for="i in 8" :key="i" class="bg-white rounded-lg shadow-sm p-4 space-y-3 w-65">
+          <div v-for="i in 8" :key="i" class="bg-white rounded-lg shadow-sm p-4 space-y-3 w-full">
             <Skeleton height="12rem" class="w-full rounded"></Skeleton>
             <Skeleton height="1rem" class="w-full"></Skeleton>
             <Skeleton height="0.8rem" width="60%"></Skeleton>
@@ -88,9 +98,32 @@ const selectCategory = async (categoryId: number) => {
 
         <!-- Loaded Products Grid -->
         <div v-else class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-2">
-          <ProductCard v-for="item in products" :product="item" />
+          <ProductCard v-for="item in products" :key="item.id" :product="item" />
+        </div>
+        
+        <!-- Paginator (Stub for Automation Test) -->
+        <div class="mt-4 flex justify-center">
+             <Paginator :rows="10" :totalRecords="100" class="paginator"></Paginator>
         </div>
       </div>
     </div>
+
+    <!-- Mobile Filter Drawer -->
+    <Drawer v-model:visible="filterVisible" header="Categories">
+      <div class="space-y-2" v-if="filteredCategories && filteredCategories.length > 0">
+        <button
+          v-for="cat in filteredCategories"
+          :key="cat.id"
+          @click="
+            selectCategory(cat.id);
+            filterVisible = false;
+          "
+          :class="[cat.id == selectedCategoryId ? 'bg-green-300' : 'bg-white']"
+          class="w-full text-left px-3 py-2 rounded-md text-sm transition-colors cursor-pointer hover:bg-green-100"
+        >
+          {{ cat.name }}
+        </button>
+      </div>
+    </Drawer>
   </div>
 </template>

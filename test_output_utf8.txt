@@ -1,0 +1,64 @@
+﻿
+======================================================================
+SHOPPING APP AUTOMATION TEST SUITE
+======================================================================
+Initializing WebDriver...
+
+
+--- NAVIGATION & LOAD TESTS ---
+Navigating to http://localhost:5173/
+Γ£ô PASS: Page Load & Title - Title: Vite App
+
+--- UI ELEMENT DISCOVERY TESTS ---
+Γ£ô PASS: App Container Found
+Γ£ô PASS: Navigation Tabs - Found 5 tab(s)
+Γ£ù FAIL: Product List Tab - Tab not found
+Γ£ù FAIL: Product Management Tab - Tab not found
+
+--- CART FUNCTIONALITY TESTS ---
+Γ£ô PASS: Cart Icon Found
+Γ£ù FAIL: Cart Functionality - element not interactable
+  (Session info: chrome=142.0.7444.176)
+
+--- PRODUCT LIST TESTS ---
+Γ£ù FAIL: Navigate to Product List
+Γ£ô PASS: Search Bar Found
+Γ£ù FAIL: Products Displayed - No products found on page
+Γ£ô PASS: Product Information Visible - Found 7 product element(s)
+Γ£ù FAIL: Pagination Controls
+
+--- SEARCH FUNCTIONALITY TESTS ---
+Γ£ô PASS: Search Input Interaction - Typed search term
+Γ£ô PASS: Clear Search Input
+
+--- PRODUCT MANAGEMENT TESTS ---
+Γ£ù FAIL: Navigate to Product Management
+Γ£ô PASS: Add Product Button
+Γ£ô PASS: Form Elements Present - Found 2 form input(s)
+Γ£ù FAIL: Product Action Buttons - No action buttons found
+
+--- TAB NAVIGATION TESTS ---
+Γ£ù FAIL: Tab Navigation - List to Management
+Γ£ù FAIL: Tab Navigation - Management to List
+
+--- RESPONSIVE UI TESTS ---
+Γ£ô PASS: Page Content Loaded - Content length: 124 chars
+Γ£ô PASS: No Error Messages
+Γ£ô PASS: Page Fully Loaded - Loading elements: 0
+
+--- ACCESSIBILITY TESTS ---
+Γ£ô PASS: Buttons Present - Found 15 button(s)
+Γ£ô PASS: Form Labels - Found 0 label(s)
+
+--- CONSOLE LOGS TEST ---
+Γ£ô PASS: No Browser Errors
+
+======================================================================
+TEST SUMMARY
+======================================================================
+Γ£ô Passed: 16
+Γ£ù Failed: 10
+  Total:  26
+======================================================================
+
+Browser closed.

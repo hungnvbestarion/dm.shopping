@@ -22,5 +22,7 @@ app.use(PrimeVue, {
 app.use(DialogService)
 app.use(ToastService)
 app.use(ConfirmationService)
+import BadgeDirective from 'primevue/badgedirective'
+app.directive('badge', BadgeDirective)
 
 app.mount('#app')
