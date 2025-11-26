@@ -5,13 +5,17 @@ import { storeToRefs } from 'pinia'
 import Skeleton from 'primevue/skeleton'
 import ProductCard from '@/components/ProductCard.vue'
 import ProductSearchBar from './ProductSearchBar.vue'
+import ProductGalleryDialog from '@/components/ProductGalleryDialog.vue'
 import Drawer from 'primevue/drawer'
 import Button from 'primevue/button'
 import Paginator from 'primevue/paginator'
+import type { Product } from '@/models/product.model'
 
 const productStore = useProductStore()
 const keySearch = ref<string>('')
 const filterVisible = ref(false)
+const galleryVisible = ref(false)
+const selectedProduct = ref<Product | null>(null)
 
 const { products, filteredCategories, selectedCategoryId, loading } = storeToRefs(productStore)
 
@@ -29,6 +33,16 @@ const selectCategory = async (categoryId: number) => {
   productStore.setSelectedCategory(categoryId)
   await productStore.loadProducts()
 }
+
+const openGallery = (product: Product) => {
+  selectedProduct.value = product
+  galleryVisible.value = true
+}
+
+const closeFilterDrawer = async (categoryId: number) => {
+  await selectCategory(categoryId)
+  filterVisible.value = false
+}
 </script>
 
 <!------------------------------------------------------------------------------------------------------------->
@@ -36,7 +50,7 @@ const selectCategory = async (categoryId: number) => {
 <template>
   <div class="flex gap-6 flex-col lg:flex-row h-full">
     <!-- Filters Sidebar -->
-    <aside class="hidden lg:block w-64 flex-shrink-0">
+    <aside class="hidden lg:block w-64 shrink-0">
       <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
         <h2 class="font-semibold text-lg mb-4">Categories</h2>
 
@@ -68,7 +82,13 @@ const selectCategory = async (categoryId: number) => {
 
     <!-- Mobile Filter Button -->
     <div class="lg:hidden">
-      <Button label="Filters" icon="pi pi-filter" @click="filterVisible = true" outlined class="w-full" />
+      <Button
+        label="Filters"
+        icon="pi pi-filter"
+        @click="filterVisible = true"
+        outlined
+        class="w-full"
+      />
     </div>
 
     <!-- Products Grid -->
@@ -98,12 +118,17 @@ const selectCategory = async (categoryId: number) => {
 
         <!-- Loaded Products Grid -->
         <div v-else class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-2">
-          <ProductCard v-for="item in products" :key="item.id" :product="item" />
+          <ProductCard
+            v-for="item in products"
+            :key="item.id"
+            :product="item"
+            @viewGallery="openGallery"
+          />
         </div>
-        
+
         <!-- Paginator (Stub for Automation Test) -->
         <div class="mt-4 flex justify-center">
-             <Paginator :rows="10" :totalRecords="100" class="paginator"></Paginator>
+          <Paginator :rows="10" :totalRecords="100" class="paginator"></Paginator>
         </div>
       </div>
     </div>
@@ -114,10 +139,7 @@ const selectCategory = async (categoryId: number) => {
         <button
           v-for="cat in filteredCategories"
           :key="cat.id"
-          @click="
-            selectCategory(cat.id);
-            filterVisible = false;
-          "
+          @click="closeFilterDrawer(cat.id)"
           :class="[cat.id == selectedCategoryId ? 'bg-green-300' : 'bg-white']"
           class="w-full text-left px-3 py-2 rounded-md text-sm transition-colors cursor-pointer hover:bg-green-100"
         >
@@ -125,5 +147,8 @@ const selectCategory = async (categoryId: number) => {
         </button>
       </div>
     </Drawer>
+
+    <!-- Product Gallery Dialog -->
+    <ProductGalleryDialog v-model:visible="galleryVisible" :product="selectedProduct" />
   </div>
 </template>

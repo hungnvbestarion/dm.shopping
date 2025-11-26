@@ -9,6 +9,10 @@ const props = defineProps<{
   product: Product
 }>()
 
+const emit = defineEmits<{
+  viewGallery: [product: Product]
+}>()
+
 const cartStore = useCartStore()
 const toast = useToast()
 
@@ -21,6 +25,10 @@ const addToCart = (product: Product) => {
     life: 3000,
   })
 }
+
+const openGallery = () => {
+  emit('viewGallery', props.product)
+}
 </script>
 
 <!------------------------------------------------------------------------------------------------------------->
@@ -29,11 +37,12 @@ const addToCart = (product: Product) => {
   <div
     class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden group flex flex-col h-full"
   >
-    <div class="relative aspect-square overflow-hidden bg-gray-100">
+    <div class="relative aspect-square overflow-hidden bg-gray-100 cursor-pointer group">
       <img
         :src="props.product.images[0]"
         :alt="props.product.title"
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        @click="openGallery"
       />
       <button
         @click.stop="addToCart(props.product)"
