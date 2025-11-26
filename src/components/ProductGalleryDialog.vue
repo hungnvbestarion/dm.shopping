@@ -90,7 +90,7 @@ const handleHide = () => {
         >
           <template #item="slotProps">
             <div
-              class="flex justify-center items-center h-96 bg-gray-100 rounded-lg overflow-hidden ml-5"
+              class="flex justify-center items-center h-96 bg-gray-100 rounded-lg overflow-hidden mr-1"
             >
               <img
                 :src="slotProps.item"

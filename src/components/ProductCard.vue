@@ -18,12 +18,6 @@ const toast = useToast()
 
 const addToCart = (product: Product) => {
   cartStore.addToCart(product)
-  toast.add({
-    severity: 'success',
-    summary: 'Added to Cart',
-    detail: `${product.title} added to cart`,
-    life: 3000,
-  })
 }
 
 const openGallery = () => {
