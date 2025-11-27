@@ -43,7 +43,7 @@ const openGallery = () => {
         class="absolute bottom-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-green-500 hover:text-white transition-colors"
         title="Add to cart"
       >
-        <i class="pi pi-shopping-cart"></i>
+        <i class="pi pi-shopping-cart cursor-pointer"></i>
       </button>
     </div>
     <div class="p-4 flex flex-col flex-1">

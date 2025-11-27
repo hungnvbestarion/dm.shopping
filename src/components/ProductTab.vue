@@ -34,7 +34,7 @@ const cartVisible = ref(false)
 
         <div class="flex items-center gap-4">
           <Button
-            icon="fa fa-shopping-cart"
+            icon="pi pi-shopping-cart"
             text
             rounded
             v-badge="totalItems"
