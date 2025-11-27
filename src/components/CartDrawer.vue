@@ -12,7 +12,10 @@ const visible = defineModel<boolean>('visible')
 
 <template>
   <Drawer v-model:visible="visible" header="Shopping Cart" position="right" class="w-full md:w-96">
-    <div v-if="items.length === 0" class="flex flex-col items-center justify-center h-full text-gray-500">
+    <div
+      v-if="items.length === 0"
+      class="flex flex-col items-center justify-center h-full text-gray-500"
+    >
       <i class="pi pi-shopping-cart text-4xl mb-4"></i>
       <p>Your cart is empty</p>
     </div>
@@ -21,7 +24,11 @@ const visible = defineModel<boolean>('visible')
       <div class="flex-1 overflow-y-auto space-y-4">
         <div v-for="item in items" :key="item.product.id" class="flex gap-4 border-b pb-4">
           <div class="w-20 h-20 bg-gray-100 rounded overflow-hidden flex-shrink-0">
-            <img :src="item.product.images[0]" :alt="item.product.title" class="w-full h-full object-cover" />
+            <img
+              :src="item.product.images[0]"
+              :alt="item.product.title"
+              class="w-full h-full object-cover"
+            />
           </div>
           <div class="flex-1">
             <h4 class="font-medium text-sm line-clamp-2">{{ item.product.title }}</h4>

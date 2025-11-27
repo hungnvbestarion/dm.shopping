@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import ProductList from '@/components/ProductList.vue'
 import ProductManagement from '@/components/ProductManagement.vue'
 import CartDrawer from '@/components/CartDrawer.vue'
+import CustomMegaMenu from '@/components/CustomMegaMenu.vue'
 import Tabs from 'primevue/tabs'
 import TabList from 'primevue/tablist'
 import Tab from 'primevue/tab'
@@ -26,8 +27,11 @@ const cartVisible = ref(false)
 <template>
   <div class="min-h-screen bg-gray-50 flex flex-col">
     <header class="bg-white shadow-sm sticky top-0 z-10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <h1 class="text-xl font-bold text-gray-900">DM Shopping</h1>
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex flex-row items-center justify-between"
+      >
+        <CustomMegaMenu class="basis-11/12" />
+
         <div class="flex items-center gap-4">
           <Button
             icon="fa fa-shopping-cart"
