@@ -78,7 +78,7 @@ import ChatWidget from '@/components/ChatWidget.vue'
 ```typescript
 import AIService from '@/services/ai.service'
 
-const aiService = new AIService('sk-ant-YOUR_API_KEY')
+const aiService = new AIService()
 const response = await aiService.sendMessage('Tell me about electronics')
 console.log(response.message)
 console.log(response.suggestions)
@@ -109,7 +109,7 @@ interface ChatResponse {
 
 ### ai.service.ts
 
-- Handles communication with Claude API
+- Handles communication with Google Gemini API
 - Maintains conversation history
 - Extracts suggestions from responses
 - Error handling and API key validation
@@ -129,7 +129,7 @@ The service maintains full conversation history, allowing Claude to understand c
 
 The AI is configured with a specialized shopping assistant system prompt that:
 
-- Understands the store's product categories
+- Understands the store's product categories (Electronics, Clothing, Home, Sports, Books)
 - Provides product recommendations
 - Answers e-commerce related questions
 - Maintains a friendly tone
@@ -145,20 +145,20 @@ The AI is configured with a specialized shopping assistant system prompt that:
 
 ### "API Key not configured" Warning
 
-1. Make sure `VITE_AI_API_KEY` is set in `.env`
+1. Make sure `VITE_GEMINI_API_KEY` is set in `.env`
 2. Restart the development server after updating `.env`
-3. The key should start with `sk-ant-`
+3. Verify the API key is valid from Google AI Studio
 
 ### No Response from AI
 
-1. Verify your Claude API key is valid
-2. Check that your API key has sufficient credits
+1. Verify your Google Gemini API key is valid
+2. Check that your API key has sufficient quota
 3. Check browser console for detailed error messages
-4. Ensure you're using a valid model name
+4. Ensure you're using a valid model name (e.g., `gemini-2.5-flash`)
 
 ### Slow Responses
 
-- Claude API responses may take 2-5 seconds depending on query complexity
+- Gemini API responses may take 1-3 seconds depending on query complexity
 - Loading indicator will show while waiting for response
 - Longer conversations may take slightly longer
 
@@ -169,14 +169,15 @@ The AI is configured with a specialized shopping assistant system prompt that:
 Edit `src/services/ai.service.ts`:
 
 ```typescript
-model: 'claude-3-5-sonnet-20241022', // Change this line
+private model: string = 'gemini-2.5-flash' // Change this line
 ```
 
 Available models:
 
-- `claude-3-opus-20250219`
-- `claude-3-sonnet-20240229`
-- `claude-3-haiku-20240307`
+- `gemini-2.5-flash` - Fast and efficient (recommended)
+- `gemini-2.5-pro` - More capable, slower
+- `gemini-1.5-flash` - Previous generation, fast
+- `gemini-1.5-pro` - Previous generation, capable
 
 ### Customize System Prompt
 
@@ -186,7 +187,7 @@ Edit the `getSystemPrompt()` method in `ai.service.ts` to change the assistant's
 
 The ChatWidget uses Tailwind CSS classes. Key classes:
 
-- `bg-gradient-to-r from-blue-600 to-blue-700` - Header gradient
+- `bg-green-600` - Header background
 - `bg-blue-600` - User message background
 - `bg-gray-200` - Assistant message background
 
@@ -201,12 +202,20 @@ The ChatWidget uses Tailwind CSS classes. Key classes:
 
 ## API Costs
 
-Claude API calls are billed per token. For the default configuration:
+Google Gemini API has a generous free tier and paid options:
 
-- Input tokens: $0.003 per 1K tokens
-- Output tokens: $0.015 per 1K tokens
+**Free Tier (Gemini 2.5 Flash):**
+- 15 requests per minute (RPM)
+- 1 million tokens per minute (TPM)
+- 1,500 requests per day (RPD)
 
-The shopping assistant system prompt is approximately 200 tokens, which is sent with each request.
+**Paid Tier Pricing:**
+- Input: $0.075 per 1M tokens
+- Output: $0.30 per 1M tokens
+
+The shopping assistant system prompt is approximately 100 tokens, which is sent with each request.
+
+For more details, visit [Google AI Pricing](https://ai.google.dev/pricing)
 
 ## Browser Compatibility
 
