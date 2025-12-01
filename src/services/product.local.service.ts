@@ -13,7 +13,7 @@ class ProductLocalService {
 
     // 2. Filter by title (case-insensitive)
     if (title) {
-      const searchTitle = title.toLowerCase()
+      const searchTitle = title.toLowerCase().trim()
       filteredProducts = filteredProducts.filter(
         (product) => !searchTitle || product.title.toLowerCase().includes(searchTitle),
       )

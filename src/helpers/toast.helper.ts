@@ -33,6 +33,16 @@ export class ToastHelper {
     })
   }
 
+  static showWarn(message: string) {
+    const toast = ToastHelper.getToast()
+    toast.add({
+      severity: 'warn',
+      summary: 'WARNING',
+      detail: message,
+      life: 3000,
+    })
+  }
+
   static showInfo(message: string) {
     const toast = ToastHelper.getToast()
     toast.add({
