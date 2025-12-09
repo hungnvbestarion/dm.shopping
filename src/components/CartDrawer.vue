@@ -23,7 +23,7 @@ const visible = defineModel<boolean>('visible')
     <div v-else class="flex flex-col h-full">
       <div class="flex-1 overflow-y-auto space-y-4">
         <div v-for="item in items" :key="item.product.id" class="flex gap-4 border-b pb-4">
-          <div class="w-20 h-20 bg-gray-100 rounded overflow-hidden flex-shrink-0">
+          <div class="w-20 h-20 bg-gray-100 rounded overflow-hidden shrink-0">
             <img
               :src="item.product.images[0]"
               :alt="item.product.title"

@@ -125,11 +125,6 @@ const closeFilterDrawer = async (categoryId: number) => {
             @viewGallery="openGallery"
           />
         </div>
-
-        <!-- Paginator (Stub for Automation Test) -->
-        <div class="mt-4 flex justify-center">
-          <Paginator :rows="10" :totalRecords="100" class="paginator"></Paginator>
-        </div>
       </div>
     </div>
 

@@ -7,4 +7,3 @@ import ScrollToTopButton from '@/components/ScrollToTopButton.vue'
   <ProductTab />
   <ScrollToTopButton />
 </template>
-

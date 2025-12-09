@@ -12,9 +12,11 @@ import TabPanel from 'primevue/tabpanel'
 import Button from 'primevue/button'
 import { useCartStore } from '@/stores/cart.store'
 import { storeToRefs } from 'pinia'
+import ProductChart from './ProductCharts/ProductChart.vue'
 
 const productListTab = 'PRODUCT_LIST'
 const productManagementTab = 'PRODUCT_MANAGEMENT'
+const productStatisticTab = 'PRODUCT_STATISTIC'
 const tab = ref<string>(productListTab)
 
 const cartStore = useCartStore()
@@ -50,6 +52,7 @@ const cartVisible = ref(false)
         <TabList>
           <Tab :value="productListTab">Product List</Tab>
           <Tab :value="productManagementTab">Product Management</Tab>
+          <Tab :value="productStatisticTab">Product Statistic</Tab>
         </TabList>
 
         <TabPanels>
@@ -59,6 +62,10 @@ const cartVisible = ref(false)
 
           <TabPanel :value="productManagementTab">
             <ProductManagement />
+          </TabPanel>
+
+          <TabPanel :value="productStatisticTab">
+            <ProductChart />
           </TabPanel>
         </TabPanels>
       </Tabs>

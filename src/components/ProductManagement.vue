@@ -11,7 +11,6 @@ import type { Product } from '@/models/product.model'
 import { useDialog } from 'primevue/usedialog'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
-import { ToastHelper } from '@/helpers/toast.helper'
 
 const toast = useToast()
 const productStore = useProductStore()
@@ -97,12 +96,12 @@ const showDialog = (item: Product | null) => {
       class="w-full md:w-56 items-center"
       @change="selectCategory($event.value)"
     ></Select>
-    <button
-      class="bg-green-800 w-30 h-12 border rounded-lg text-white items-center text-center cursor-pointer"
+    <Button
       @click="editProduct(null)"
+      class="bg-green-800 w-30 h-12 border rounded-lg text-white items-center text-center cursor-pointer"
     >
-      <i class="fa fa-plus-circle"></i> Add New
-    </button>
+      <i class="fa fa-plus-circle"></i> <span class="">Add New</span>
+    </Button>
   </div>
 
   <div class="mt-10">
