@@ -48,7 +48,7 @@ const openGallery = () => {
     </div>
     <div class="p-4 flex flex-col flex-1">
       <div class="flex justify-between items-start mb-2">
-        <span class="text-xl font-bold text-gray-900">${{ props.product.price }}</span>
+        <span class="text-xl text-gray-900">${{ props.product.price }}</span>
         <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">{{
           props.product.category.name
         }}</span>

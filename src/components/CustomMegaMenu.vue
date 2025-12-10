@@ -2,8 +2,6 @@
 import { ref } from 'vue'
 import MegaMenu from 'primevue/megamenu'
 import Button from 'primevue/button'
-import Avatar from 'primevue/avatar'
-import { separator } from '@primeuix/themes/aura/breadcrumb'
 
 const items = ref([
   {
@@ -86,7 +84,7 @@ const items = ref([
       <template #item="{ item }">
         <a
           v-if="item.root"
-          class="flex items-center cursor-pointer px-4 py-2 overflow-hidden relative font-black uppercase"
+          class="flex items-center cursor-pointer px-4 py-2 overflow-hidden relative font-medium uppercase"
           style="border-radius: 2rem"
         >
           <span>{{ item.label }}</span>
@@ -98,7 +96,7 @@ const items = ref([
             <i :class="[item.icon, 'text-8xl']"></i>
           </span>
           <span class="inline-flex flex-col">
-            <span class="font-bold">{{ item.label }}</span>
+            <span class="font-medium">{{ item.label }}</span>
             <span class="whitespace-nowrap text-sm">{{ item.subtext }}</span>
           </span>
         </a>

@@ -52,7 +52,7 @@ const closeFilterDrawer = async (categoryId: number) => {
     <!-- Filters Sidebar -->
     <aside class="hidden lg:block w-64 shrink-0">
       <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
-        <h2 class="font-semibold text-lg mb-4">Categories</h2>
+        <h2 class="font-medium text-lg mb-4">Categories</h2>
 
         <!-- Loading Skeleton Categories-->
         <div v-if="loading" class="space-y-3">

@@ -13,10 +13,12 @@ import Button from 'primevue/button'
 import { useCartStore } from '@/stores/cart.store'
 import { storeToRefs } from 'pinia'
 import ProductChart from './ProductCharts/ProductChart.vue'
+import IncomeTaxCalculator from './Calculators/IncomeTaxCalculator.vue'
 
 const productListTab = 'PRODUCT_LIST'
 const productManagementTab = 'PRODUCT_MANAGEMENT'
 const productStatisticTab = 'PRODUCT_STATISTIC'
+const calculatorTab = 'CALCULATOR'
 const tab = ref<string>(productListTab)
 
 const cartStore = useCartStore()
@@ -53,6 +55,7 @@ const cartVisible = ref(false)
           <Tab :value="productListTab">Product List</Tab>
           <Tab :value="productManagementTab">Product Management</Tab>
           <Tab :value="productStatisticTab">Product Statistic</Tab>
+          <Tab :value="calculatorTab">Calculators</Tab>
         </TabList>
 
         <TabPanels>
@@ -66,6 +69,10 @@ const cartVisible = ref(false)
 
           <TabPanel :value="productStatisticTab">
             <ProductChart />
+          </TabPanel>
+
+          <TabPanel :value="calculatorTab">
+            <IncomeTaxCalculator />
           </TabPanel>
         </TabPanels>
       </Tabs>
