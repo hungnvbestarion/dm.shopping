@@ -3,8 +3,6 @@ import type { Product } from '@/models/product.model'
 import { useCartStore } from '@/stores/cart.store'
 import Button from 'primevue/button'
 
-import { useToast } from 'primevue/usetoast'
-
 const props = defineProps<{
   product: Product
 }>()
@@ -14,7 +12,6 @@ const emit = defineEmits<{
 }>()
 
 const cartStore = useCartStore()
-const toast = useToast()
 
 const addToCart = (product: Product) => {
   cartStore.addToCart(product)

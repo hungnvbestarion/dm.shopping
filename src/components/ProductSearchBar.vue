@@ -1,19 +1,13 @@
 <script setup lang="ts">
-// 1. Declare the props
-defineProps<{
-  keySearch: string
-}>()
+const keySearch = defineModel<string>('keySearch')
 
-// 2. Declare the custom events
 const emit = defineEmits<{
-  'update:keySearch': [value: string]
   onSearchChange: [value: string]
 }>()
 
 // Handler for input changes
 const handleInput = (event: Event) => {
   const value = (event.target as HTMLInputElement).value
-  emit('update:keySearch', value)
   emit('onSearchChange', value)
 }
 </script>
@@ -38,7 +32,7 @@ const handleInput = (event: Event) => {
     <input
       type="text"
       placeholder="Search products..."
-      :value="keySearch"
+      v-model="keySearch"
       @input="handleInput($event)"
       class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:border-transparent"
     />

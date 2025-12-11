@@ -22,6 +22,7 @@
   "dependencies": {
     "@google/genai": "^1.30.0",
     "@primeuix/themes": "^1.2.5",
+    "@primevue/forms": "^4.5.3",
     "axios": "^1.13.2",
     "chart.js": "^4.5.1",
     "pinia": "^3.0.3",
