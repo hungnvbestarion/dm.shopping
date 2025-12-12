@@ -7,7 +7,9 @@ import DatePicker from 'primevue/datepicker'
 import RadioButton from 'primevue/radiobutton'
 import Button from 'primevue/button'
 import Message from 'primevue/message'
+import { ref, watch } from 'vue'
 
+const formRef = ref<any>(null) // <-- Ref declaration
 const activeStep = defineModel<string>('activeStep', { required: true })
 const formData = defineModel<TaxFormData>('formData', { required: true })
 
@@ -49,6 +51,12 @@ const onFormSubmit = ({ valid }: { valid: any }) => {
     activeStep.value = '1'
   }
 }
+
+watch(activeStep, (newStep, oldStep) => {
+  if (formRef.value && newStep !== oldStep) {
+    formRef.value.reset()
+  }
+})
 </script>
 
 <!------------------------------------------------------------------------------------------------------------->
