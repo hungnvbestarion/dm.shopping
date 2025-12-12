@@ -9,3 +9,11 @@ export interface TaxFormData {
   credits: number
   estimatedRefund: number
 }
+
+export enum IncomeTaxSteps {
+  BasicInfo = '0',
+  Income = '1',
+  Deductions = '2',
+  Credits = '3',
+  Result = '4',
+}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TaxFormData } from '@/models/tax-form-data.model'
+import { IncomeTaxSteps, type TaxFormData } from '@/models/tax-form-data.model'
 import Divider from 'primevue/divider'
 import Button from 'primevue/button'
 import Card from 'primevue/card'
@@ -9,7 +9,7 @@ const formData = defineModel<TaxFormData>('formData', { required: true })
 
 const startOver = () => {
   formData.value = {} as TaxFormData
-  activeStep.value = '0'
+  activeStep.value = IncomeTaxSteps.BasicInfo
 }
 </script>
 

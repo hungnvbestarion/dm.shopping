@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TaxFormData } from '@/models/tax-form-data.model'
+import { IncomeTaxSteps, type TaxFormData } from '@/models/tax-form-data.model'
 import { Form } from '@primevue/forms'
 import Divider from 'primevue/divider'
 import InputNumber from 'primevue/inputnumber'
@@ -9,7 +9,7 @@ import Button from 'primevue/button'
 import Message from 'primevue/message'
 import { ref, watch } from 'vue'
 
-const formRef = ref<any>(null) // <-- Ref declaration
+const formRef = ref<HTMLFormElement>()
 const activeStep = defineModel<string>('activeStep', { required: true })
 const formData = defineModel<TaxFormData>('formData', { required: true })
 
@@ -48,7 +48,7 @@ const validationResolver = ({ values }: { values: Record<string, any> }) => {
 
 const onFormSubmit = ({ valid }: { valid: any }) => {
   if (valid) {
-    activeStep.value = '1'
+    activeStep.value = IncomeTaxSteps.Income
   }
 }
 

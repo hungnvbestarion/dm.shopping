@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TaxFormData } from '@/models/tax-form-data.model'
+import { IncomeTaxSteps, type TaxFormData } from '@/models/tax-form-data.model'
 import InputNumber from 'primevue/inputnumber'
 import Button from 'primevue/button'
 
@@ -43,8 +43,13 @@ const formData = defineModel<TaxFormData>('formData', { required: true })
     </div>
 
     <div class="flex justify-between gap-3 pt-6 border-t">
-      <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activeStep = '1'" />
-      <Button label="Next" icon="pi pi-arrow-right" @click="activeStep = '3'" />
+      <Button
+        label="Back"
+        severity="secondary"
+        icon="pi pi-arrow-left"
+        @click="activeStep = IncomeTaxSteps.Income"
+      />
+      <Button label="Next" icon="pi pi-arrow-right" @click="activeStep = IncomeTaxSteps.Credits" />
     </div>
   </div>
 </template>

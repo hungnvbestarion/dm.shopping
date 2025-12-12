@@ -10,7 +10,7 @@ import BasicInforStep from './BasicInforStep.vue'
 import IncomeInformationStep from './IncomeInformationStep.vue'
 import DeductionStep from './DeductionStep.vue'
 import TaxCreditStep from './TaxCreditStep.vue'
-import EstimationStep from './EstimationStep.vue'
+import EstimationStep from './EstimationResultStep.vue'
 import ForecastRefund from './ForecastRefund.vue'
 
 const activeStep = ref('0')
@@ -62,7 +62,7 @@ const setStepLabelClass = (stepId: string) => {
 
     <Stepper :value="activeStep" class="w-full">
       <StepList class="flex gap-4 mb-8 flex-wrap">
-        <Step v-for="step in steps" :key="step.id" :value="step.id">
+        <Step v-for="step in steps" :key="step.id" :value="step.id" disabled>
           <div class="flex flex-col items-center justify-center gap-2 text-center">
             <div
               :class="[

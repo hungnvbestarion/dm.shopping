@@ -4,6 +4,10 @@ import type { TaxFormData } from '@/models/tax-form-data.model'
 const formData = defineModel<TaxFormData>('formData', { required: true })
 
 const formatCurrency = (value: number) => {
+  if (value === null || value === undefined || isNaN(value)) {
+    return '0.00'
+  }
+
   return value?.toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
