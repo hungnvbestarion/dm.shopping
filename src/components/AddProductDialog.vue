@@ -13,7 +13,6 @@ import InputNumber from 'primevue/inputnumber'
 import Textarea from 'primevue/textarea'
 import Select from 'primevue/select'
 import { useProductStore } from '@/stores/product.store'
-import { ToastHelper } from '@/helpers/toast.helper'
 
 const emit = defineEmits<{
   onSubmit: []
