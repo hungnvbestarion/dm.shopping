@@ -14,17 +14,7 @@ import EstimationStep from './EstimationStep.vue'
 import ForecastRefund from './ForecastRefund.vue'
 
 const activeStep = ref('0')
-const formData = ref<TaxFormData>({
-  taxYear: 2025,
-  dateOfBirth: null,
-  usedTaxActLastYear: null,
-  filingStatus: null,
-  canBeClaimed: null,
-  income: 0,
-  deductions: 0,
-  credits: 0,
-  estimatedRefund: 0,
-})
+const formData = ref<TaxFormData>({} as TaxFormData)
 
 const steps = [
   { id: '0', label: 'Basic Info', icon: 'pi pi-fw pi-user' },

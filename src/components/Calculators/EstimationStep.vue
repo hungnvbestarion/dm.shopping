@@ -6,6 +6,11 @@ import Card from 'primevue/card'
 
 const activeStep = defineModel<string>('activeStep', { required: true })
 const formData = defineModel<TaxFormData>('formData', { required: true })
+
+const startOver = () => {
+  formData.value = {} as TaxFormData
+  activeStep.value = '0'
+}
 </script>
 
 <!------------------------------------------------------------------------------------------------------------->
@@ -95,7 +100,7 @@ const formData = defineModel<TaxFormData>('formData', { required: true })
 
     <div class="flex gap-3 pt-6 border-t">
       <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activeStep = '3'" />
-      <Button label="Start Over" icon="pi pi-refresh" @click="activeStep = '0'" />
+      <Button label="Start Over" icon="pi pi-refresh" @click="startOver" />
     </div>
   </div>
 </template>

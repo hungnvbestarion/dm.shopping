@@ -54,27 +54,14 @@ const onFormSubmit = ({ valid }: { valid: any }) => {
 <!------------------------------------------------------------------------------------------------------------->
 
 <template>
-  <Form
-    v-slot="$form"
-    :resolver="validationResolver"
-    :validateOnValueUpdate="false"
-    :validateOnBlur="true"
-    @submit="onFormSubmit"
-  >
+  <Form ref="formRef" v-slot="$form" :resolver="validationResolver" @submit="onFormSubmit">
     <div class="p-4 space-y-6">
       <h3 class="text-xl font-bold text-gray-800 mb-4">Personal Information</h3>
 
       <div class="grid grid-cols-3 gap-4">
         <div class="col-span-1">
           <label class="text-sm font-medium text-gray-700 mb-2">Tax Year</label>
-          <InputNumber
-            name="taxYear"
-            v-model="formData.taxYear"
-            :min="2015"
-            :max="2026"
-            :use-grouping="false"
-            fluid
-          />
+          <InputNumber name="taxYear" v-model="formData.taxYear" :use-grouping="false" fluid />
           <Message v-if="$form.taxYear?.invalid" severity="error" size="small" variant="simple">
             {{ $form.taxYear.error?.message }}
           </Message>
